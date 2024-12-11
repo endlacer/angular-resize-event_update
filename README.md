@@ -37,8 +37,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
-// Import the library module
-import { AngularResizeEventModule } from 'angular-resize-event';
+// Import the Directive
+import { ResizedDirective } from 'angular-resize-event';
 
 @NgModule({
   declarations: [
@@ -47,8 +47,8 @@ import { AngularResizeEventModule } from 'angular-resize-event';
   imports: [
     BrowserModule,
 
-    // Specify AngularResizeEventModule library as an import
-    AngularResizeEventModule
+    // Specify ResizedDirective as an import
+      ResizedDirective
   ],
   providers: [],
   bootstrap: [ AppComponent ]
