@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, NgZone, OnDestroy, OnInit, Output } from '@angular/core';
+import { Directive, ElementRef, NgZone, OnDestroy, OnInit, output } from '@angular/core';
 import { ResizedEvent } from './resized.event';
 
 @Directive({
@@ -6,20 +6,16 @@ import { ResizedEvent } from './resized.event';
   standalone: true
 })
 export class ResizedDirective implements OnInit, OnDestroy {
-  private observer: ResizeObserver;
+  private observer: ResizeObserver = new ResizeObserver(entries => this.zone.run(() => this.observe(entries)));
   private oldRect?: DOMRectReadOnly;
 
-  @Output()
-  public readonly resized;
+  public readonly resized = output<ResizedEvent>();
 
   public constructor(
     private readonly element: ElementRef,
     private readonly zone: NgZone
   )
-  {
-    this.resized = new EventEmitter<ResizedEvent>();
-    this.observer = new ResizeObserver(entries => this.zone.run(() => this.observe(entries)));
-  }
+  { }
 
   public ngOnInit(): void {
     this.observer.observe(this.element.nativeElement)
